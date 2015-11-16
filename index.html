@@ -1,0 +1,404 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>JS</title>
+
+		<meta name="description"
+			content="A framework for easily creating beautiful presentations using HTML">
+		<meta name="author" content="Yuki Ishii">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style"
+			content="black-translucent" />
+
+		<meta name="viewport"
+			content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/night.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ?
+				'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h1>JS</h1>
+					<h3>intro to prototype</h3>
+				</section>
+
+				<section>
+					<h2>Topics</h2>
+					<ul>
+						<li>Introduction</li>
+						<li>Prototype</li>
+						<li>
+							Design Patterns:
+							<ol>
+								<li>Constructor</li>
+								<li>Factory</li>
+								<li>Module</li>
+							</ol>
+						</li>
+					</ul>
+				</section>
+
+				<section>
+					<section>
+						<h2>Intro to Javascript</h2>
+					</section>
+					<section>
+						<h2>Intro to Javascript</h2>
+						<blockquote cite="https://developer.mozilla.org/en-US/docs/Web/JavaScript">
+							&ldquo;JavaScript (often shortened to JS) is a lightweight, interpreted, object-oriented language with first-class functions, most known as the scripting language for Web pages, but used in many non-browser environments as well such as node.js or Apache CouchDB. It is a prototype-based, multi-paradigm scripting language that is dynamic, and supports object-oriented, imperative, and functional programming styles.&rdquo;
+						</blockquote>
+					</section>
+					<section>
+						<h2>First class functions</h2>
+						<ul>
+							<li>
+								pass functions as arguments to other functions
+							</li>
+							<li>
+								return them as values from other functions
+							</li>
+							<li>
+								assign them to variables
+							</li>
+							<li>
+								store them in data structures
+							</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Prototype-based programming</h2>
+						<blockquote cite="https://en.wikipedia.org/wiki/Prototype-based_programming">
+							&ldquo;Prototype-based programming is a style of object-oriented programming in which behaviour reuse (known as inheritance) is performed via a process of cloning existing objects that serve as prototypes. This model can also be known as prototypal, prototype-oriented, classless, or instance-based programming. Delegation is the language feature that supports prototype-based programming.&rdquo;
+						</blockquote>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>Object Prototype</h2>
+					</section>
+					<section>
+						<h2>Object Prototype</h2>
+						<blockquote cite="https://developer.mozilla.org/en/docs/Web/JavaScript/Inheritance_and_the_prototype_chain">
+							&ldquo;JavaScript objects are dynamic "bags" of properties (referred to as own properties). JavaScript objects have a link to a prototype object. When trying to access a property of an object, the property will not only be sought on the object but on the prototype of the object, the prototype of the prototype, and so on until either a property with a matching name is found or the end of the prototype chain is reached.&rdquo;
+						</blockquote>
+					</section>
+					<section>
+						<h2>Prototype Chain</h2>
+						<p>
+							All about objects being linked to other objects
+						</p>
+					</section>
+					<section>
+						<h2>Code</h2>
+						<pre><code data-trim contenteditable>
+var user = {
+	"name": "prototype",
+	"getName": function() {
+		return this.name;
+	}
+};
+
+console.log( "Name: %s", user.name );
+// Is there a 'name' property on user? Yes
+// Name: prototype
+
+console.log( "Name: %s", user.getName() );
+// Is there a 'getName' method on user? Yes
+// Name: prototype
+
+console.log( "Has name property: %s", user.hasOwnProperty( "name" ) );
+// Is there a hasOwnProperty method on user? No, check its prototype
+// Is there a hasOwnProperty method on the prototype of user ? Yes
+// Has name property: true
+
+console.log( Object.getPrototypeOf( user ) );
+// Object {
+//	...
+//	hasOwnProperty: function hasOwnProperty() { ... },
+//	...
+// }
+						</code></pre>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>Prototype and Inheritance</h2>
+					</section>
+
+					<section>
+						<h2>Prototype and Inheritance</h2>
+						<blockquote cite="https://developer.mozilla.org/en/docs/Web/JavaScript/Inheritance_and_the_prototype_chain">
+							&ldquo;JavaScript is a bit confusing for developers experienced in class-based languages (like Java or C++), as it is dynamic and does not provide a class implementation per se (the class keyword is introduced in ES6, but is syntactical sugar, JavaScript remaining prototype-based).&rdquo;
+						</blockquote>
+						<blockquote cite="https://developer.mozilla.org/en/docs/Web/JavaScript/Inheritance_and_the_prototype_chain">
+							&ldquo;When it comes to inheritance, JavaScript only has one construct: objects. Each object has an internal link to another object called its prototype. That prototype object has a prototype of its own, and so on until an object is reached with null as its prototype. null, by definition, has no prototype, and acts as the final link in this prototype chain.&rdquo;
+						</blockquote>
+					</section>
+
+					<section>
+						<h2>Prototype and Inheritance (ES5)</h2>
+						<pre><code data-trim contenteditable>
+/**
+ * Class: User
+ */
+function User( name ) {
+
+	this.name = name;
+
+}
+
+User.prototype.getName = function() {
+
+	return this.name;
+
+};
+
+
+/**
+ * Class: Admin
+ */
+function Admin( name ) {
+
+	User.call( this, name );
+
+}
+
+// Create an Admin.prototype object that inherits from User.prototype
+// Object.create() creates a new object with the specified prototype object and properties
+// Object.create( proto[, propertiesObject] )
+Admin.prototype = Object.create( User.prototype );
+
+// Set the "constructor" property to refer to Admin
+Admin.prototype.constructor = Admin;
+
+
+var admin1 = new Admin( "hello" );
+
+console.log( "Is admin1 and instanceof Admin? %s", admin1 instanceof Admin );
+// Is admin1 and instanceof Admin? true
+
+console.log( "Is admin1 and instanceof User? %s", admin1 instanceof User );
+// Is admin1 and instanceof User? true
+
+console.log( "Name: %s", admin1.getName() );
+// Name: hello
+						</code></pre>
+					</section>
+
+					<section>
+						<h2>Prototype and Inheritance (ES6)</h2>
+						<pre><code data-trim contenteditable>
+class User {
+
+	constructor( name ) {
+		this.name = name;
+	}
+
+	getName() {
+		return this.name;
+	}
+
+}
+
+class Admin extends User {
+
+	constructor( name ) {
+		super( name );
+	}
+
+	getName() {
+		return ( "admin: " + super.getName() );
+	}
+
+}
+						</code></pre>
+						<p>Try on <a target="_blank" href="https://babeljs.io/repl/">Babel</a></p>
+					</section>
+				</section>
+
+				<section>
+					<h2>Design Patterns</h2>
+				</section>
+
+				<section>
+					<section>
+						<h2>Constructor</h2>
+						<blockquote cite="Learning Javascript Design Patterns">
+							&ldquo;By simply prefixing a call to a constructor function with the keyword new, we can tell JavaScript we would like the function to behave like a constructor and instantiate a new object with the members defined by that function.&rdquo;
+						</blockquote>
+					</section>
+
+					<section>
+						<h2>Constructor</h2>
+						<pre><code data-trim contenteditable>
+/**
+ * Class: User
+ */
+function User( name ) {
+
+	if ( this instanceof User ) {
+		this.name = name;
+		return this;
+	} else {
+		return new User( name );
+	}
+
+}
+
+var user1 = new User( "hello" );
+						</code></pre>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>Factory</h2>
+						<blockquote cite="Learning Javascript Design Patterns">
+							&ldquo;A Factory can provide a generic interface for creating objects, where we can specify the type of factory object we wish to be created.&rdquo;
+						</blockquote>
+					</section>
+
+					<section>
+						<h2>Factory</h2>
+						<pre><code data-trim contenteditable>
+function ComponentFactory( type ) {
+
+	var component = null;
+
+	if ( type === "C" ) {
+		component = new Comp();
+	} else if ( type === "S" ) {
+		component = new Symbol();
+	}
+
+	return component;
+
+}
+
+var comp1 = ComponentFactory( "C" );
+var symbol1 = ComponentFactory( "S" );
+						</code></pre>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>Module</h2>
+						<blockquote cite="Learning Javascript Design Patterns">
+							&ldquo;In JavaScript, the Module pattern is used to further emulate the concept of classes in such a way that we’re able to include both public/private methods and variables inside a single object, thus shielding particular parts from the global scope.&rdquo;
+						</blockquote>
+					</section>
+
+					<section>
+						<h2>Module</h2>
+						<pre><code data-trim contenteditable>
+var module = (function() {
+
+	// private variable
+	var value = "private value";
+
+	return {
+		// public method
+		"getValue": function() {
+			return value;
+		}
+	};
+
+})();
+
+console.log( module.getValue() );
+// private value
+						</code></pre>
+					</section>
+				</section>
+
+				<section style="text-align: left;">
+					<h2>References</h2>
+					<ul>
+						<li>
+							<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript">Developer Mozilla Org</a>
+						</li>
+						<li>
+							<a href="https://github.com/getify/You-Dont-Know-JS">You Don't Know JS</a>
+						</li>
+						<li>
+							Learning Javascript Design Patterns (Addy Osmani)
+						</li>
+					</ul>
+				</section>
+
+				<section style="text-align: left;">
+					<h1>THE END</h1>
+				</section>
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: 'lib/js/classList.js',
+						condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js',
+						condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js',
+						condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js',
+						async: true,
+						condition: function() { return !!document.querySelector( 'pre code' ); },
+						callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js',
+						async: true },
+					{ src: 'plugin/notes/notes.js',
+						async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>

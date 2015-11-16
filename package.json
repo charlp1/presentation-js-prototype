@@ -1,0 +1,15 @@
+{
+    "name": "presentation-js-prototype",
+    "version": "1.0.0",
+    "description": "Short presentation on JS prototype",
+    "main": "index.js",
+    "scripts": {
+        "server": "http-server --cors -p 8000",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "Yuki",
+    "license": "ISC",
+    "dependencies": {
+        "http-server": "^0.8.5"
+    }
+}
