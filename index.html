@@ -46,68 +46,62 @@
 			<div class="slides">
 				<section>
 					<h1>JS</h1>
-					<h3>intro to prototype</h3>
+					<h3>prototype</h3>
 				</section>
 
 				<section>
 					<h2>Topics</h2>
 					<ul>
 						<li>Introduction</li>
-						<li>Prototype</li>
-						<li>
-							Design Patterns:
-							<ol>
-								<li>Constructor</li>
-								<li>Factory</li>
-								<li>Module</li>
-							</ol>
-						</li>
+						<li>Objects</li>
+						<li>Inheritance</li>
+						<li>Design Patterns</li>
 					</ul>
 				</section>
 
 				<section>
 					<section>
-						<h2>Intro to Javascript</h2>
+						<h2>Introduction</h2>
 					</section>
 					<section>
-						<h2>Intro to Javascript</h2>
+						<h2>WHY</h2>
+						<p>learn about prototype in JS?</p>
+					</section>
+					<section>
+						<h2>Prototype</h2>
+						<p>A fundamental concept in JS</p>
+					</section>
+					<section>
+						<h2>JavaScript</h2>
 						<blockquote cite="https://developer.mozilla.org/en-US/docs/Web/JavaScript">
-							&ldquo;JavaScript (often shortened to JS) is a lightweight, interpreted, object-oriented language with first-class functions, most known as the scripting language for Web pages, but used in many non-browser environments as well such as node.js or Apache CouchDB. It is a prototype-based, multi-paradigm scripting language that is dynamic, and supports object-oriented, imperative, and functional programming styles.&rdquo;
+							&ldquo;JavaScript (often shortened to JS) is a lightweight, interpreted, object-oriented language with first-class functions, most known as the scripting language for Web pages, but used in many non-browser environments as well such as node.js or Apache CouchDB. <br/><br/>It is a prototype-based, multi-paradigm scripting language that is dynamic, and supports object-oriented, imperative, and functional programming styles.&rdquo;
 						</blockquote>
 					</section>
 					<section>
-						<h2>First class functions</h2>
-						<ul>
-							<li>
-								pass functions as arguments to other functions
-							</li>
-							<li>
-								return them as values from other functions
-							</li>
-							<li>
-								assign them to variables
-							</li>
-							<li>
-								store them in data structures
-							</li>
-						</ul>
+						<h2>JavaScript</h2>
+						<p>is a prototype-based scripting language.</p>
+					</section>
+					<section>
+						<h2>Prototype-based Programming</h2>
+						<p>What is it?</p>
 					</section>
 					<section>
 						<h2>Prototype-based programming</h2>
 						<blockquote cite="https://en.wikipedia.org/wiki/Prototype-based_programming">
-							&ldquo;Prototype-based programming is a style of object-oriented programming in which behaviour reuse (known as inheritance) is performed via a process of cloning existing objects that serve as prototypes. This model can also be known as prototypal, prototype-oriented, classless, or instance-based programming. Delegation is the language feature that supports prototype-based programming.&rdquo;
+							&ldquo;Prototype-based programming is a style of object-oriented programming in which behaviour reuse (known as inheritance) is performed via a process of cloning existing objects that serve as prototypes. <br/><br/>This model can also be known as prototypal, prototype-oriented, classless, or instance-based programming. Delegation is the language feature that supports prototype-based programming.&rdquo;
 						</blockquote>
 					</section>
 				</section>
 
 				<section>
 					<section>
-						<h2>Object Prototype</h2>
+						<h2>WHAT</h2>
+						<p>is prototype in JS?</p>
 					</section>
 					<section>
-						<h2>Object Prototype</h2>
+						<h2>Prototype Object</h2>
 						<blockquote cite="https://developer.mozilla.org/en/docs/Web/JavaScript/Inheritance_and_the_prototype_chain">
-							&ldquo;JavaScript objects are dynamic "bags" of properties (referred to as own properties). JavaScript objects have a link to a prototype object. When trying to access a property of an object, the property will not only be sought on the object but on the prototype of the object, the prototype of the prototype, and so on until either a property with a matching name is found or the end of the prototype chain is reached.&rdquo;
+							&ldquo;JavaScript objects are dynamic "bags" of properties (referred to as own properties). <br/><br/>JavaScript objects have a link to a prototype object. <br/><br/>When trying to access a property of an object, the property will not only be sought on the object but on the prototype of the object, the prototype of the prototype, and so on until either a property with a matching name is found or the end of the prototype chain is reached.&rdquo;
 						</blockquote>
 					</section>
 					<section>
@@ -115,6 +109,14 @@
 						<p>
 							All about objects being linked to other objects
 						</p>
+					</section>
+					<section>
+						<h2>Prototype property</h2>
+						<ul>
+							<li>Link of an object to its prototype object</li>
+							<li>Is not enumerable ( not accessible in for/in loop )</li>
+							<li>__proto__ "pseudo" property ( browsers )</li>
+						</ul>
 					</section>
 					<section>
 						<h2>Code</h2>
@@ -151,9 +153,13 @@ console.log( Object.getPrototypeOf( user ) );
 
 				<section>
 					<section>
-						<h2>Prototype and Inheritance</h2>
+						<h2>HOW</h2>
+						<p>is prototype used in JS ?</p>
 					</section>
-
+					<section>
+						<h2>Inheritance</h2>
+						<p>through prototype chain</p>
+					</section>
 					<section>
 						<h2>Prototype and Inheritance</h2>
 						<blockquote cite="https://developer.mozilla.org/en/docs/Web/JavaScript/Inheritance_and_the_prototype_chain">
@@ -163,7 +169,19 @@ console.log( Object.getPrototypeOf( user ) );
 							&ldquo;When it comes to inheritance, JavaScript only has one construct: objects. Each object has an internal link to another object called its prototype. That prototype object has a prototype of its own, and so on until an object is reached with null as its prototype. null, by definition, has no prototype, and acts as the final link in this prototype chain.&rdquo;
 						</blockquote>
 					</section>
-
+					<section>
+						<h2>Prototype and Inheritance</h2>
+						<ul>
+							<li>Create a function (constructor)</li>
+							<li>Add methods and properties on the function's prototype property</li>
+						</ul>
+						<p>Instances of that function will have those methods and properties.</p>
+					</section>
+					<section>
+						<h2>Constructor Property</h2>
+						<p>All objects that inherit from another object inherit a constructor property.</p>
+						<p>It is a property that points to the constructor of the object.</p>
+					</section>
 					<section>
 						<h2>Prototype and Inheritance (ES5)</h2>
 						<pre><code data-trim contenteditable>
@@ -203,11 +221,11 @@ Admin.prototype.constructor = Admin;
 
 var admin1 = new Admin( "hello" );
 
-console.log( "Is admin1 and instanceof Admin? %s", admin1 instanceof Admin );
-// Is admin1 and instanceof Admin? true
+console.log( "Is admin1 an instanceof Admin? %s", admin1 instanceof Admin );
+// Is admin1 an instanceof Admin? true
 
-console.log( "Is admin1 and instanceof User? %s", admin1 instanceof User );
-// Is admin1 and instanceof User? true
+console.log( "Is admin1 an instanceof User? %s", admin1 instanceof User );
+// Is admin1 an instanceof User? true
 
 console.log( "Name: %s", admin1.getName() );
 // Name: hello
@@ -337,6 +355,50 @@ var module = (function() {
 
 console.log( module.getValue() );
 // private value
+						</code></pre>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>Singleton</h2>
+						<blockquote cite="Learning Javascript Design Patterns">
+							&ldquo;There must be exactly one instance of a class, and it must be accessible to clients from a well-known access point.&rdquo;
+						</blockquote>
+					</section>
+
+					<section>
+						<h2>Singleton</h2>
+						<pre><code data-trim contenteditable>
+var Singleton = (function () {
+
+	// private
+    var instance;
+
+    function createInstance() {
+
+		var object = {
+			"name": ""
+		};
+
+        return object;
+    }
+
+    return {
+        getInstance: function () {
+
+            if ( !instance ) {
+                instance = createInstance();
+            }
+
+            return instance;
+        }
+    };
+})();
+
+var instance1 = Singleton.getInstance();
+var instance2 = Singleton.getInstance();
+console.log( 'Same instance? ', instance1 === instance2 );
 						</code></pre>
 					</section>
 				</section>
